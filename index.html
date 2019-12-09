@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/style/style.css" type="text/css" />
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <main class='container-fluid '>
+    <div class="entry row">
+      <div class="col-3 align-items-baseline">
+        <div class="img-circle retirement-icon"></div>
+      </div>
+      <div class="col-9 bg-danger">
+        <form class='form-group' method = 'POST'>
+          <table class="table text-white">
+            <!--Header : Retirement-->
+            <thead>
+              <th colspan='2'>
+                <h2>Retirement</h2>
+              </th>
+              <td><button class="text-right badge badge-danger text-white border-white"><small>x | Close</small></button></td>
+            </thead>
+            <tbody>
+              <!--Calculation for yearly expenses-->
+              <tr>
+                <td>Current age</td>
+                <td class='text-right'>Years</td>
+                <td><input id="current-age" class='form-control' type="text" name="current-age"/></td>
+              </tr>
+              <tr>
+                <td>Retirement age</td>
+                <td class='text-right'>Years</td>
+                <td><input id="retire-age" class='form-control' type="text" name="retire-age" /></td>
+              </tr>
+              <tr>
+                <td>Expected monthly expenses required during retirement years (current values)</td>
+                <td class='text-right'>S$</td>
+                <td><input id="monthly-expense" class='form-control' type="text" name="monthly-expense"/></td>
+              </tr>
+              <tr class='text-warning'>
+                <th>Expected yearly expenses required during retirement years</th>
+                <td class='text-right'>S$</td>
+                <td><span id='yearly-expense'> 0.00 </span></td>
+              </tr>
+
+          
+              <!--Calculation for sum required to fund retirement-->
+              <tr>
+                <td>Expected lifespan post-retirement</td>
+                <td class='text-right'>Years</td>
+                <td><input class='form-control' type="text" id="expect-lifespan" name="expect-lifespan" /></td>
+              </tr>
+              <tr>
+                <td>Inflation rate</td>
+                <td class='text-right'>%</td>
+                <td><input class='form-control' type="text" id="inflation-rate" name="inflation-rate" /></td>
+              </tr>
+              <tr>
+                <td>Interest rate</td>
+                <td class='text-right'>%</td>
+                <td><input class='form-control' type="text" id="interest-rate" name="interest-rate" /></td>
+              </tr>
+              <tr class='text-warning'>
+                <th>Total sum required in <span id='year-to-retire'>__</span> years to fund your retirement</th>
+                <td class='text-right'>S$</td>
+                <td> <span id="retire-sum"> 0.00</span></td>
+              </tr>
+
+              <!--Projected value of retirement savings-->
+              <tr>
+                <td>Annual income put aside for retirement</td>
+                <td class='text-right'>S$</td>
+                <td><input class='form-control' id='annual-income' type="text" name="annual-income" /></td>
+              </tr>
+              <tr class='text-warning'>
+                <th>Projected value of your retirement savings in XX years</th>
+                <td class='text-right'>S$</td>
+                <td > <span id="retire-saving">0.00</span></td>
+              </tr>
+  
+              <!--Total Surplus or (Shortfall)-->
+              <tr>
+                <td>Projected Value of Insurance Policies</td>
+                <td class='text-right'>S$</td>
+                <td><input class='form-control' type="text" id='value-insurance' name="value-insurance" /></td>
+              </tr>
+              <tr>
+                <td>Projected CPF Savings</td>
+                <td class='text-right'>S$</td>
+                <td><input class='form-control' type="text" id='value-cpf' name="value-cpf" /></td>
+              </tr>
+              <tr>
+                <td>Projected Value of other Assets</td>
+                <td class='text-right'>S$</td>
+                <td><input class='form-control' type="text" id='value-other-assets' name="value-other-assets" /></td>
+              </tr>
+              <tr class='text-warning'>
+                <th>Total Surplus or (Shortfall)</th>
+                <td class='text-right'>S$</td>
+                <td><span id='total-assets'> 0.00 </span></td>
+              </tr>
+              <!--Submit Button-->
+              <tr>
+                <td></td>
+                <td></td>
+                <td><input class='btn btn-secondary' type='submit' value='Proceed'></td>
+              </tr>
+                
+            </tbody>
+
+
+          </table>
+        </form>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src='script/script.js'></script>
+  <script>
+    
+
+    
+  </script>
+
+</body>
+
+</html>
