@@ -2,18 +2,95 @@ $(function () {
     let answer = 0;
     let yearlyExpense = 0
     let yearsToRetirement = 0
-    let retireFundNeeded = 0
+
+    let retireFundNeeded = 3300000
+
     let retirementSaving = 0
     let interestRate = 0
     let inflationRate = 0
-    let totalAssetsValue = 0
+
+    let totalAssetsValue = 300000
     
     $('#show-chart').on('click',function() {
-      alert ('555');
       window.location.href = "show-chart.html";
-
+      // showChart()
     });
 
+    // Function to display the charts
+      let myChart = document.getElementById('myChart').getContext('2d');
+      alert (retireFundNeeded)
+      //Global Options
+      Chart.defaults.global.defaultFontFamily = 'Lato';
+      Chart.defaults.global.defaultFontSize = 15;
+      Chart.defaults.global.defaultFontColor = 'white';
+
+      let massPopChart = new Chart(myChart, {
+        type : 'bar', // bar, horizontalBar, pie, line, doughnut, radar, PolcarArea
+        data : {
+          labels :['Funds Required','Funds Available','Gap'],
+          datasets : [{
+            // label : 'Gold Medals',
+            data : [
+              retireFundNeeded,
+              totalAssetsValue,
+              (retireFundNeeded-totalAssetsValue),
+            ],
+            // backgroundColor : 'lightblue',
+            backgroundColor : [
+              '#bdc6c2',
+              '0f95c2',
+              'fcad48',
+            ],
+            // borderWidth  : 1,
+            // borderColor: 'white',
+            hoverBorderWidth: 3,
+            hoverBorderColor: 'white'
+          }]  
+        },
+        options : {
+          title : {
+            display : 'true',
+            text : 'Seagames Results - Number of Gold',
+            fontSize : 25,
+          },
+          legend : {
+            display : false,
+            position : 'right',
+            labels : {
+              fontColor : 'white',
+              backgroundColor : 'brown',
+
+            }
+           },
+           layout : {
+             padding : {
+               left : 100,
+               right : 50,
+               top : 0,
+               bottom : 0,
+             }
+           },
+           tooltips : {
+             enabled : true // true or false..  display the value when hover over the bar
+           },
+           scales: {
+            yAxes: [{
+                display: true,
+                ticks: {
+                    suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                    // OR //
+                    beginAtZero: true   // minimum value will be 0.
+                }
+            }]
+           }
+    
+        
+        }
+
+      });
+    
+    
+    
 
     function currencyFormat(num) {
       return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -29,18 +106,12 @@ $(function () {
           $("#year-to-retire").text(yearsToRetirement);
         }
     }
-    function showChart() {
-      alert ('555')
-      window.location.href = "show-chart.html";
-    }
     $("#monthly-expense").change(function(){
-      // alert('change');
       let monthlyExpense = parseInt( $("#monthly-expense").val() ) ;
       yearlyExpense = monthlyExpense * 12
       $('#yearly-expense').text(currencyFormat(yearlyExpense))
 
     });
-
     $("#current-age").change(function(){
       yearToRetire()
     });
@@ -148,80 +219,3 @@ $(function () {
     });
 
 })
-
-let myChart = document.getElementById('myChart').getContext('2d');
-
-      //Global Options
-      Chart.defaults.global.defaultFontFamily = 'Lato';
-      Chart.defaults.global.defaultFontSize = 15;
-      Chart.defaults.global.defaultFontColor = 'white';
-      
-
-
-      let massPopChart = new Chart(myChart, {
-        type : 'bar', // bar, horizontalBar, pie, line, doughnut, radar, PolcarArea
-        data : {
-          labels :['Funds Required','Funds Available','Gap'],
-          datasets : [{
-            // label : 'Gold Medals',
-            data : [
-              800000,
-              200000,
-              500000,
-            ],
-            // backgroundColor : 'pink'
-            backgroundColor : [
-              'grey',
-              'blue',
-              'yellow'
-            ],
-            // borderWidth  : 1,
-            // borderColor: 'white',
-            hoverBorderWidth: 3,
-            hoverBorderColor: 'white'
-          }]  
-        },
-        options : {
-          title : {
-            display : 'true',
-            text : 'Seagames Results - Number of Gold',
-            fontSize : 25,
-          },
-          legend : {
-            display : false,
-            position : 'right',
-            labels : {
-              fontColor : 'white',
-              backgroundColor : 'brown',
-
-            }
-           },
-           layout : {
-             padding : {
-               left : 100,
-               right : 50,
-               top : 0,
-               bottom : 0,
-             }
-           },
-           tooltips : {
-             enabled : true // true or false..  display the value when hover over the bar
-           },
-           scales: {
-            yAxes: [{
-                display: true,
-                ticks: {
-                    suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
-                    // OR //
-                    beginAtZero: true   // minimum value will be 0.
-                }
-            }]
-           }
-    
-        
-        }
-
-      });
-    
-    
-    
