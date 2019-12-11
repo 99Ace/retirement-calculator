@@ -13,12 +13,11 @@ $(function () {
     
     $('#show-chart').on('click',function() {
       window.location.href = "show-chart.html";
-      // showChart()
     });
 
-    // Function to display the charts
+
+    
       let myChart = document.getElementById('myChart').getContext('2d');
-      alert (retireFundNeeded)
       //Global Options
       Chart.defaults.global.defaultFontFamily = 'Lato';
       Chart.defaults.global.defaultFontSize = 15;
@@ -73,9 +72,22 @@ $(function () {
            tooltips : {
              enabled : true // true or false..  display the value when hover over the bar
            },
+           
            scales: {
+             
+            xAxes: [{
+              gridLines: { 
+                zeroLineColor: 'white',
+                color: 'rgba(0,0,0,0.0)', 
+              }
+            }],
             yAxes: [{
                 display: true,
+                gridLines: { 
+                  zeroLineColor: 'white',
+                  color: 'rgba(0,0,0,0.0)', 
+
+                },
                 ticks: {
                     suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
                     // OR //

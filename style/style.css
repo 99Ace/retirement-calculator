@@ -1,0 +1,31 @@
+.retirement-page{
+    height: 968px;
+}
+
+.entry {
+    background-color: #af1e44;
+    background-image: linear-gradient(to right, #af1e44, #df1f4c); 
+}
+
+.img-circle {
+    width : 180px;
+    position: absolute;
+    top : 65%;
+    left : 30%;
+}
+.header-calculator {
+    width: 100%;
+    background-color: #e02a55;
+    color : #afb2b0;
+    text-align: right;
+    font-size: 3.5rem;
+    position: absolute;
+    bottom : 0;
+}
+
+.header-retirement {
+    background-color: red;
+    color : white;
+    font-size: 3rem;
+    font-family: 'Times New Roman', Times, serif;
+}
