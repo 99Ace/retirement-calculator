@@ -1,7 +1,7 @@
 $(function () {
     let data = {
-      currentAge : 10,
-      retireAge : 20,
+      currentAge : 0,
+      retireAge : 0,
       yearsToRetirement : 0,
 
       yearlyExpense : 0,
@@ -13,17 +13,14 @@ $(function () {
       projectedRetireSaving : 0,
 
       retireFundNeeded : 0,
-      // totalAssetsValue : 0,
+      totalAsset : 0,
+      requiredFunds : 0,
     }
   // Function to convert the value into Currency display with commas (solution found online)
   function currencyFormat(num) {
     return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   } 
-    
-  // Function to convert the value into Currency display with commas (solution found online)
-  // function currencyFormat(num) {
-  //   return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-  // } 
+  
   // Calculate the [ Number Of Years to Retirement ] based on User input
   function yearToRetire(){ 
     data.retireAge = $("#retire-age").val();
@@ -42,15 +39,25 @@ $(function () {
       $(".year-to-retire").text(data.yearsToRetirement);
     }
     retireSumRequired();
-    retireSaving();
+  }
+  
+  // Calculate the [ Yearly Expenses Required ] based on User input for monthly requirement
+  function calYearlyExpense() {
+    let monthlyExpense = parseInt( $("#monthly-expense").val() );
+    data.yearlyExpense = monthlyExpense * 12
+    if ( (data.yearlyExpense <=0) || (Number.isNaN(data.yearlyExpense)) ){
+      $('#yearly-expense').text('0.00')
+    }
+    else {
+      $('#yearly-expense').text(currencyFormat(data.yearlyExpense))
+    }
+    retireSumRequired();
   }
 
   function retireSumRequired() {
-    // alert ('retire sum required calculation')
     // get the value of the various field
     data.inflationRate = parseFloat( $('#inflation-rate').val() ) / 100
     data.interestRate = parseFloat( $('#interest-rate').val() ) / 100
-    // alert (data.interestRate + ' and '+ data.inflationRate)
     data.lifespan = parseInt( $('#expect-lifespan').val() ) 
 
     // if either of the values are not valid, it will not perform any calculation and return '0.00' to the html 
@@ -80,10 +87,10 @@ $(function () {
       // send the value to the html 
       $("#retire-fund-needed").text(currencyFormat(data.retireFundNeeded));
     }
+    retireSaving();  
   }
   
   function retireSaving() {
-    // alert('retirement saving')
     let annualIncome = $('#annual-income').val()
     if (Number.isNaN(annualIncome) || (annualIncome <=0 ) || Number.isNaN(data.interestRate) 
         || (Number.isNaN(data.yearsToRetirement)) || (data.yearsToRetirement <= 0) ){
@@ -100,18 +107,45 @@ $(function () {
       }
     }
     $("#retire-saving").text(currencyFormat(data.projectedRetireSaving));
+    totalAssetValue();
   }
 
-  function calYearlyExpense() {
-    let monthlyExpense = parseInt( $("#monthly-expense").val() );
-    data.yearlyExpense = monthlyExpense * 12
-    if ( (data.yearlyExpense <=0) || (Number.isNaN(data.yearlyExpense)) ){
-      $('#yearly-expense').text('0.00')
+  function totalAssetValue () {
+    let insuranceValue = 0
+    let cpfValue = 0
+    let otherAssets = 0
+    insuranceValue = parseInt( $('#value-insurance').val() )
+    cpfValue = parseInt( $('#value-cpf').val() )
+    otherAssets = parseInt( $('#value-other-assets').val() )
+
+    if (Number.isNaN(insuranceValue)){
+      insuranceValue = 0
+    }
+    if (Number.isNaN(cpfValue)){
+      cpfValue = 0
+    }
+    if (Number.isNaN(otherAssets)){
+      otherAssets = 0
+    }
+    data.totalAsset = data.projectedRetireSaving + insuranceValue + cpfValue + otherAssets
+    amountToRetire()
+  }
+
+  function amountToRetire () {
+    let message = ''
+    if ( (Number.isNaN('data.totalAsset')) || (Number.isNaN('data.retireFundNeeded')) ) {
+      message = `0.00`  
     }
     else {
-      $('#yearly-expense').text(currencyFormat(data.yearlyExpense))
+      data.requiredFunds = data.totalAsset - data.retireFundNeeded
+      if (data.requiredFunds < 0) {
+        message = `( ${currencyFormat(data.requiredFunds)} )`
+      }
+      else {
+        message = `${currencyFormat(data.requiredFunds)}`
+      }
     }
-    retireSumRequired();
+    $('#require-funds').text(message)
   }
 
   /* Detect for change in the input for current-age and retire-age and update the values accordingly
@@ -131,10 +165,14 @@ $(function () {
   });    
 
   // Detect for change in either of the following, will trigger the function 'retireSaving()' to calculate the retirement saving amount
-  $('#annual-income, #interest-rate').on('change',function(){
+  $('#annual-income,  #interest-rate').on('change',function(){ // #interest-rate'
     retireSaving()
   })
 
+  // Detect for change in either of the following, will trigger the function 'totalAssetValue()' to calculate the total assets saving
+  $('#value-insurance, #value-cpf, #value-other-assets').on('change',function(){
+    totalAssetValue()
+  })
   
       
 })
