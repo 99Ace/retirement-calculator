@@ -21,6 +21,12 @@ $(function () {
     return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   } 
   
+// Redirect the page to show-chart.html to display the bar-chart with the data keyed in
+// $('#show-chart').on('click',function() {
+//   window.location.href = "show-chart.html";
+//   $('#shortfall').text('Linked')
+// });
+    
   // Calculate the [ Number Of Years to Retirement ] based on User input
   function yearToRetire(){ 
     data.retireAge = $("#retire-age").val();
@@ -146,7 +152,17 @@ $(function () {
       }
     }
     $('#require-funds').text(message)
+    localStorage.setItem ('retireFundNeeded', data.retireFundNeeded)
   }
+
+
+
+  // function showChart() {
+
+  //   // let retireFundNeeded = localStorage.getItem("retireFundNeeded");
+  //   // alert('retrieve value : ' + retireFundNeeded)
+  //   $('#shortfall').text('Linked')
+  // }
 
   /* Detect for change in the input for current-age and retire-age and update the values accordingly
   It will trigger the function yearToRetire() to calculate the value and pass into the html */
@@ -173,6 +189,5 @@ $(function () {
   $('#value-insurance, #value-cpf, #value-other-assets').on('change',function(){
     totalAssetValue()
   })
-  
-      
+
 })
