@@ -25,7 +25,8 @@
                 </div>
                 <div class="col-4"></div>
                 <div class="col-2">
-                  <button class="text-right badge badge-danger text-white border-white"><small>x | Close</small></button>
+                  <!-- Added Link to close the chart and go back to a fresh entry page -->
+                  <a class="text-right badge badge-danger text-white border-white" id='return-to-index'><small>x | Close</small></a>
                 </div>
               </div> 
 
@@ -35,18 +36,18 @@
               </div> 
 
               <!-- Information Display -->
-              <div class="row">
+              <div class="row text-light px-5 text-center">
                 <div class="col-4 border-right">
-                  <h4>Total Funds Required</h4>
-                  <h4><span id="total-funds-required"></span></h4>
+                  <h5>Total Funds Required</h5>
+                  <h5>S$<span id="total-funds-required"></span></h5>
                 </div>
                 <div class="col-4">
-                  <h4>Total Current Funds Available</h4>
-                  <h4><span id="total-current-funds-available"></span></h4>
+                  <h5>Total Current Funds Available</h5>
+                  <h5>S$<span id="total-current-funds-available"></span></h5>
                 </div>
-                <div class="col-4 border-left"> 
-                  <h4>Shortfall</h4>
-                  <h4><span id="shortfall"></span></h4>
+                <div class="col-4 border-left text-warning"> 
+                  <h5 id='shortfall-header'>Shortfall</h5>
+                  <h5>S$<span id="shortfall"></span></h5>
                 </div>
               </div>  
           </div>

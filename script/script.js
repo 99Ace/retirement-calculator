@@ -1,5 +1,8 @@
+
+  
 $(function () {
-    let data = {
+  // setting the 'data' as holder for all datas required for calculation
+  let data = {
       currentAge : 0,
       retireAge : 0,
       yearsToRetirement : 0,
@@ -15,17 +18,12 @@ $(function () {
       retireFundNeeded : 0,
       totalAsset : 0,
       requiredFunds : 0,
-    }
+  }
+
   // Function to convert the value into Currency display with commas (solution found online)
   function currencyFormat(num) {
     return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   } 
-  
-// Redirect the page to show-chart.html to display the bar-chart with the data keyed in
-// $('#show-chart').on('click',function() {
-//   window.location.href = "show-chart.html";
-//   $('#shortfall').text('Linked')
-// });
     
   // Calculate the [ Number Of Years to Retirement ] based on User input
   function yearToRetire(){ 
@@ -47,7 +45,7 @@ $(function () {
     retireSumRequired();
   }
   
-  // Calculate the [ Yearly Expenses Required ] based on User input for monthly requirement
+  // Calculate the [ Yearly Expenses Required ] + display in html
   function calYearlyExpense() {
     let monthlyExpense = parseInt( $("#monthly-expense").val() );
     data.yearlyExpense = monthlyExpense * 12
@@ -60,6 +58,7 @@ $(function () {
     retireSumRequired();
   }
 
+  // Calculate the [ Total Retirement Fund Required ]+ display in html
   function retireSumRequired() {
     // get the value of the various field
     data.inflationRate = parseFloat( $('#inflation-rate').val() ) / 100
@@ -96,6 +95,7 @@ $(function () {
     retireSaving();  
   }
   
+  // Calculate the amount of [ Retirement Saving ] in XX number of years + display in html
   function retireSaving() {
     let annualIncome = $('#annual-income').val()
     if (Number.isNaN(annualIncome) || (annualIncome <=0 ) || Number.isNaN(data.interestRate) 
@@ -116,6 +116,7 @@ $(function () {
     totalAssetValue();
   }
 
+  // Calculate the [ Total Asset Value ]
   function totalAssetValue () {
     let insuranceValue = 0
     let cpfValue = 0
@@ -137,6 +138,7 @@ $(function () {
     amountToRetire()
   }
 
+  // Calculate the [ Total Excess or Shortfall for the Retirement Fund ] + display in html
   function amountToRetire () {
     let message = ''
     if ( (Number.isNaN('data.totalAsset')) || (Number.isNaN('data.retireFundNeeded')) ) {
