@@ -153,16 +153,9 @@ $(function () {
     }
     $('#require-funds').text(message)
     localStorage.setItem ('retireFundNeeded', data.retireFundNeeded)
+    localStorage.setItem ('totalAsset', data.totalAsset)
+    localStorage.setItem ('requiredFunds', data.requiredFunds)
   }
-
-
-
-  // function showChart() {
-
-  //   // let retireFundNeeded = localStorage.getItem("retireFundNeeded");
-  //   // alert('retrieve value : ' + retireFundNeeded)
-  //   $('#shortfall').text('Linked')
-  // }
 
   /* Detect for change in the input for current-age and retire-age and update the values accordingly
   It will trigger the function yearToRetire() to calculate the value and pass into the html */
