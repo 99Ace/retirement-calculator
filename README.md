@@ -1,4 +1,4 @@
-# retirement-calculator
+# Retirement-calculator
 
 Purpose to create a portion of the financial calculator
 
